@@ -1,0 +1,106 @@
+Create table CompanyMaster
+(
+  id int identity(1,1) NOT NULL,
+  name varchar(50),
+  status int
+)
+go
+
+Create table FileMaster
+(
+  Id int identity(1,1) NOT NULL,
+  FileName varchar(50),
+  CompanyId int
+)
+go
+
+
+create procedure Company_Details_Insert
+@name varchar(50),
+@out_id int output
+as
+begin
+
+       insert into CompanyMaster
+       (
+	   name,
+           status  
+       )
+       values
+       (
+	   @name,
+           null 
+       )
+       
+      set @out_id=SCOPE_IDENTITY();
+end
+go
+
+Create Procedure file_Details_Insert
+@image varchar(50),
+@id int
+as
+begin
+
+       insert into FileMaster
+       (
+	   FileName,
+    	   CompanyId
+       )
+       values
+       (
+	   @filename,
+ 	   @id
+       )
+
+end
+go
+
+Create Procedure Company_LIST_GET
+as
+begin
+
+       select 
+             id,
+             name
+
+       from
+            CompanyMaster 
+
+end
+go
+
+create Procedure show_all_documents
+@id int 
+as
+begin
+ 
+      select 
+            '/Image/'+FileName as document,
+	    FileName
+ 
+      from 
+	    CompanyMaster c
+            inner join FileMaster f on c.id=CompanyId 
+ 
+      where
+            c.id=@id
+
+end
+go
+
+create procedure update_status
+@id int,
+@status int
+as
+begin
+
+      update 
+            CompanyMaster
+      set
+	    status=@status
+      where
+	    id=@id
+      
+end
+go

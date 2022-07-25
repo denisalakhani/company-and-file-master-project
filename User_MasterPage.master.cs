@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class User_MasterPage : System.Web.UI.MasterPage
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void lnklogout_click(object sender, EventArgs e)
+    {
+        Response.Redirect("User_login.aspx");
+        Session["user_id"] = "";
+    }
+
+    protected void lnkprofile_click(object sender, EventArgs e)
+    {
+        Response.Redirect("User_profile.aspx");
+    }
+}
